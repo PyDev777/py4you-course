@@ -22,8 +22,11 @@ from catalog import views
 
 
 urlpatterns = [
-    path('', views.index_view),
-    path('catalog/', views.catalog_view),
-    path('essay/', views.essay_view),
+
+    path('', views.index_view, name='home'),
+    path('catalog/', views.catalog_view, name='catalog'),
+    path('essay/', views.essay_view, name='essay'),
+
     path('admin/', admin.site.urls),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
