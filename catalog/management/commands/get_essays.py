@@ -1,8 +1,10 @@
+import sys
 from threading import Thread
 from requests_html import HTMLSession
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
 
 from catalog.models import *
 
@@ -17,6 +19,7 @@ def crawler(url):
         response = session.get(url)
 
     name = response.html.xpath('//h1')[0].text
+    print('name:', name)
 
     description = response.html.xpath('//div[contains(@class,"entry-content")]')[0].text
     description = '\n'.join([f'<p>{p}</p>' for p in description.split('\n') if p])
@@ -60,11 +63,28 @@ def crawler(url):
     essay.tag.add(tag)
 
 
+def urls_list():
+
+    with HTMLSession() as session:
+        response = session.get('https://freeessays.page/post-sitemap1.xml')  # 1000 essays!
+
+    essay_urls = response.html.xpath('//url/loc')
+    if essay_urls:
+        return [essay_url.text for essay_url in essay_urls if essay_url][:2]  # Only 2 first essays!
+    else:
+        print('Error: essay_urls is empty!')
+        return []
+
+
 class Command(BaseCommand):
-    help = 'Running books scraper'
+    help = 'Essays Scraper'
 
     def handle(self, *args, **options):
-        # url = 'https://freeessays.page/why-marriage-is-still-important/'
-        url = 'https://freeessays.page/photoshop-in-the-media/'
-        Thread(target=crawler, args=(url, )).start()
-        print('Done!')
+
+        url_gen = urls_list()
+        if url_gen:
+            with ThreadPoolExecutor(max_workers=2) as executor:  # Only 2 workers!
+                executor.map(crawler, url_gen)
+            print('Done!')
+        else:
+            print('Error!')
