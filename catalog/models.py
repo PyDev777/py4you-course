@@ -1,9 +1,13 @@
 from django.db import models
-
-# Create your models here.
+from django.conf import settings
 
 
 class Category(models.Model):
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=255)
     slug = models.CharField(max_length=255)
     description = models.TextField()
@@ -13,6 +17,11 @@ class Category(models.Model):
 
 
 class Tag(models.Model):
+
+    class Meta:
+        verbose_name = 'Tag'
+        verbose_name_plural = 'Tags'
+
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -20,19 +29,20 @@ class Tag(models.Model):
 
 
 class Essay(models.Model):
-    name = models.CharField(max_length=255)
-    slug = models.CharField(max_length=255)
 
+    class Meta:
+        verbose_name = 'Essay'
+        verbose_name_plural = 'Essays'
+
+    name = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255, unique=True)
+    author = models.CharField(max_length=255, blank=True, default='')
     description = models.TextField()
     published = models.DateField()
-
-    # img = models.ImageField()
-    # img_source = models.URLField(max_length=255)
-    # author = models.CharField(max_length=255)
-
-    essay_source = models.URLField(max_length=255)
-    parsing_date = models.DateTimeField(auto_created=True)
-
+    img = models.ImageField(blank=True, default='', upload_to=settings.IMG_UPLOAD_TO)
+    img_source = models.URLField(max_length=255, blank=True, default='')
+    essay_source = models.URLField(max_length=255, blank=True, default='')
+    parsing_date = models.DateTimeField(auto_now=True)
     cat = models.ManyToManyField(Category)
     tag = models.ManyToManyField(Tag)
 
