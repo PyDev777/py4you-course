@@ -1,6 +1,6 @@
 from django.shortcuts import render
-
-# Create your views here.
+from django.utils.html import format_html
+from .models import Essay
 
 
 def index_view(request):
@@ -14,5 +14,13 @@ def catalog_view(request):
 
 
 def essay_view(request):
-    context = {}
+
+    essay = Essay.objects.filter(id=104).values()[0]
+
+    essay['description'] = format_html(essay['description'])
+    # essay['category'], essay['tag'] = essay.cat.name, essay.tag.name
+
+    context = {'essay': essay}
+    # print('context:', context)
+
     return render(request, 'essay.html', context)

@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-text">
-                    <h1 class="text-center">ESSAY DETAILS</h1>
+                    <h1 class="text-center">{{ essay.name }}</h1>
                     <div class="breadcrumb-bar">
                         <ul class="breadcrumb text-center">
                             <li><a href="{% url "home" %}">Home</a></li>
-                            <li>NEWS DETAILS</li>
+                            <li>{{ essay.name }}</li>
                         </ul>
                     </div>
                 </div>
@@ -30,38 +30,20 @@
             <div class="col-lg-9 col-md-12 col-12">
                 <div class="news-details-content">
                    <div class="single-latest-item">
-                        <img src="{% static "img/details/2.jpg" %}" alt="">
+{#                        <img src="{% static "img/details/2.jpg" %}" alt="">#}
                         <div class="single-latest-text">
-                            <h3>Learn English in ease simply random text</h3>
+                            <h2>{{ essay.name }}</h2>
+                            <br>
                             <div class="single-item-comment-view">
-                               <span><i class="zmdi zmdi-calendar-check"></i>25 jun 2050</span>
+                               <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
                                <span><i class="zmdi zmdi-eye"></i>59</span>
                                <span><i class="zmdi zmdi-comments"></i>19</span>
+{#                                <p><a href="#!">{{ essay.category }}</a></p>#}
+{#                                <p><a href="#!">{{ essay.tag }}</a></p>#}
                             </div>
-                            <p>There are many variaons of passages of Lorem Ipsuable, amrn in some by injected humour, There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                            <p>There are many variaons of passages of Lorem Ipsuable, amrn in some by injected humour, There are many variations of passages of Lorem Ipsum available,</p>
-                            <div class="quote-section">
-                                <p>but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                            </div>
-                            <p>Lorem Ipsuable, amrn in some by injected humour, There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. </p>
-                            <div class="tags-and-links">
-                                <div class="related-tag">
-                                    <span>Tag:</span>
-                                    <ul class="tags">
-                                        <li><a href="#!">design,</a></li>
-                                        <li><a href="#!">Photoshop,</a></li>
-                                        <li><a href="#!">Web Design,</a></li>
-                                        <li><a href="#!">print</a></li>
-                                    </ul>
-                                </div>
-                                <div class="social-links">
-                                    <span>Share:</span>
-                                    <a href="#!"><i class="zmdi zmdi-facebook"></i></a>
-                                    <a href="#!"><i class="zmdi zmdi-twitter"></i></a>
-                                    <a href="#!"><i class="zmdi zmdi-google-old"></i></a>
-                                    <a href="#!"><i class="zmdi zmdi-instagram"></i></a>
-                                </div>
-                            </div>
+                            <br>
+                            {{ essay.description }}
+                            <div class="quote-section"></div>
                         </div>
                     </div>
                 </div>
