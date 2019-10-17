@@ -14,11 +14,11 @@
                     <div class="text-content-wrapper full-width">
                         <div class="text-content text-center">
                             <h1 class="title1 text-center mb-20">
-                                <span class="tlt block" data-in-effect="rollIn" data-out-effect="fadeOutRight" >Education Needs</span>
-                                <span class="tlt block" data-in-effect="fadeInLeftBig" data-out-effect="fadeOutRight">Complete Solution</span>
+                                <span class="tlt block" data-in-effect="rollIn" data-out-effect="fadeOutRight" >Essay Needs?</span>
+                                <span class="tlt block" data-in-effect="fadeInLeftBig" data-out-effect="fadeOutRight">Look on Essays Base.</span>
                             </h1>
                             <div class="banner-readmore wow bounceInUp" data-wow-duration="2500ms" data-wow-delay=".1s">
-                                <a class="button-default" href="{% url "home" %}">View Courses</a>
+                                <a class="button-default" href="{% url "home" %}">Find Essay Now!</a>
                             </div>
                         </div>
                     </div>
@@ -28,135 +28,104 @@
     </div>
 </div>
 <!--End of Background Area-->
+
+<!--Search Category Start-->
+<div class="search-category">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                <form action="{% url "essays" %}" method="get">
+{#                    {% csrf_token %}#}
+                    <div class="form-container">
+                        <div class="box-select">
+                            <div class="select large">
+                                <input autofocus id="search_input" name="search_input" value="" class="select" type="text">
+                            </div>
+                            <div class="select medium">
+                                <select name="category">
+                                    <option selected class="select" value="">All Categories</option>
+                                    {% for cat in cats %}
+                                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="select small">
+                                <select name="tag">
+                                    <option selected value="">All Tags</option>
+                                    {% for tag in tags %}
+                                    <option value="{{ tag.id }}">{{ tag.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button id="submit_button" type="submit">Search Essay</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Search Category-->
+
+<div class="fun-factor-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title-wrapper white">
+                    <div class="section-title">
+                        <br><p></p><br>
+                        <h3>IMPORTANT FACTS</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-12">
+                <div class="single-fun-factor">
+                    <h4>Categories</h4>
+                    <h2><span class="counter">80</span>+</h2>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+                <div class="single-fun-factor">
+                    <h4>Tags</h4>
+                    <h2><span class="counter">60</span>+</h2>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+                <div class="single-fun-factor">
+                    <h4>Essays</h4>
+                    <h2><span class="counter">3000</span>+</h2>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12">
+                <div class="single-fun-factor">
+                    <h4>Countries</h4>
+                    <h2><span class="counter">20</span>+</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--About Area Start-->
 <div class="about-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
                 <div class="about-container">
-                    <h3>WHY EDUCAT ?</h3>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text
-amr songr balga ami toami valo lasi ciri din akr dali</p>
-                    <a class="button-default" href="{% url "home" %}">Learn Now</a>
+                    <h3>WHY ESSAYS BASE?</h3>
+                    <p>This is a free Essays database. Use our tools and essay examples to get your paper started and finished. Starting a paper is hard - our essay examples must help you get past writer's block and finish paper on time.</p>
+                    <a class="button-default" href="{% url "home" %}">Go to Catalog</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!--End of About Area-->
-<!--Course Area Start-->
-<div class="course-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title-wrapper">
-                    <div class="section-title">
-                        <h3>POPULAR COURSES</h3>
-                        <p>There are many variations of passages of Lorem Ipsum</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-item">
-                    <div class="single-item-image overlay-effect">
-                        <a href="{% url "home" %}"><img src="/static/img/course/1.jpg" alt=""></a>
-                    </div>
-                    <div class="single-item-text">
-                        <h4><a href="{% url "home" %}">Photoshop CC 2017</a></h4>
-                        <div class="single-item-text-info">
-                            <span>By: <span>M S Nawaz</span></span>
-                            <span>Date: <span>20.5.15</span></span>
-                        </div>
-                        <p>There are many variations of sages of Lorem Ipsum available, but the mrity have suffered alteration in some orm, by injected humo ur,There are many but the mri have suffered alteration in some </p>
-                        <div class="single-item-content">
-                           <div class="single-item-comment-view">
-                               <span><i class="zmdi zmdi-eye"></i>59</span>
-                               <span><i class="zmdi zmdi-comments"></i>19</span>
-                           </div>
-                           <div class="single-item-rating">
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star-half"></i>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="button-bottom">
-                        <a href="{% url "home" %}" class="button-default">Learn Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-item">
-                    <div class="single-item-image overlay-effect">
-                        <a href="{% url "home" %}"><img src="/static/img/course/2.jpg" alt=""></a>
-                    </div>
-                    <div class="single-item-text">
-                        <h4><a href="{% url "home" %}">Illustrator CC 2017</a></h4>
-                        <div class="single-item-text-info">
-                            <span>By: <span>Subas Das</span></span>
-                            <span>Date: <span>20.5.15</span></span>
-                        </div>
-                        <p>There are many variations of sages of Lorem Ipsum available, but the mrity have suffered alteration in some orm, by injected humo ur,There are many but the mri have suffered alteration in some </p>
-                        <div class="single-item-content">
-                           <div class="single-item-comment-view">
-                               <span><i class="zmdi zmdi-eye"></i>59</span>
-                               <span><i class="zmdi zmdi-comments"></i>19</span>
-                           </div>
-                           <div class="single-item-rating">
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star-half"></i>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="button-bottom">
-                        <a href="{% url "home" %}" class="button-default">Learn Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-item">
-                    <div class="single-item-image overlay-effect">
-                        <a href="{% url "home" %}"><img src="/static/img/course/3.jpg" alt=""></a>
-                    </div>
-                    <div class="single-item-text">
-                        <h4><a href="{% url "home" %}">Indesign CC 2017</a></h4>
-                        <div class="single-item-text-info">
-                            <span>By: <span>Momin Boss</span></span>
-                            <span>Date: <span>20.5.15</span></span>
-                        </div>
-                        <p>There are many variations of sages of Lorem Ipsum available, but the mrity have suffered alteration in some orm, by injected humo ur,There are many but the mri have suffered alteration in some </p>
-                        <div class="single-item-content">
-                           <div class="single-item-comment-view">
-                               <span><i class="zmdi zmdi-eye"></i>59</span>
-                               <span><i class="zmdi zmdi-comments"></i>19</span>
-                           </div>
-                           <div class="single-item-rating">
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star"></i>
-                               <i class="zmdi zmdi-star-half"></i>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="button-bottom">
-                        <a href="{% url "home" %}" class="button-default">Learn Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-sm-12 text-center">
-                <a href="{% url "home" %}" class="button-default button-large">Browse All Courses <i class="zmdi zmdi-chevron-right"></i></a>
-            </div>
-        </div>
-    </div>
-</div>
-<!--End of Course Area-->
+
+
+
 
 {%  endblock main %}

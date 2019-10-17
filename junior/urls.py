@@ -24,8 +24,9 @@ from catalog import views
 urlpatterns = [
 
     path('', views.index_view, name='home'),
-    path('catalog/', views.catalog_view, name='catalog'),
-    path('essay/', views.essay_view, name='essay'),
+    # path('catalog/', views.catalog_view, name='catalog'),
+    path('essay/<int:id>/', views.essay_view, name='essay'),
+    path('essays/', views.essays_view, name='essays'),
 
     path('summernote/', include('django_summernote.urls')),
 
@@ -36,3 +37,9 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

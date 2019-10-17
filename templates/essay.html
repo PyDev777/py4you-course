@@ -11,12 +11,12 @@
             <div class="col-md-12">
                 <div class="breadcrumb-text">
                     <h1 class="text-center">{{ essay.name }}</h1>
-                    <div class="breadcrumb-bar">
-                        <ul class="breadcrumb text-center">
-                            <li><a href="{% url "home" %}">Home</a></li>
-                            <li>{{ essay.name }}</li>
-                        </ul>
-                    </div>
+{#                    <div class="breadcrumb-bar">#}
+{#                        <ul class="breadcrumb text-center">#}
+{#                            <li><a href="{% url "home" %}">Home</a></li>#}
+{#                            <li>{{ essay.name }}</li>#}
+{#                        </ul>#}
+{#                    </div>#}
                 </div>
             </div>
         </div>
@@ -30,20 +30,15 @@
             <div class="col-lg-9 col-md-12 col-12">
                 <div class="news-details-content">
                    <div class="single-latest-item">
-{#                        <img src="{% static "img/details/2.jpg" %}" alt="">#}
                         <div class="single-latest-text">
                             <h2>{{ essay.name }}</h2>
                             <br>
                             <div class="single-item-comment-view">
                                <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
-                               <span><i class="zmdi zmdi-eye"></i>59</span>
-                               <span><i class="zmdi zmdi-comments"></i>19</span>
-{#                                <p><a href="#!">{{ essay.category }}</a></p>#}
-{#                                <p><a href="#!">{{ essay.tag }}</a></p>#}
+                               <span><i class="zmdi zmdi-favorite"></i>Category {{ cat }}</span>
                             </div>
                             <br>
                             {{ essay.description }}
-                            <div class="quote-section"></div>
                         </div>
                     </div>
                 </div>

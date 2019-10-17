@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Home Three || Educat</title>
-        <meta name="description" content="">
+        <title>{% block head_title %}{% endblock head_title %} || Essays Base</title>
+        <meta name="description" content="{% block head_description %}{% endblock head_description %}">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="{% static "img/favicon.ico" %}">
@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="{% static "css/responsive.css" %}">
         <script src="{% static "js/vendor/modernizr-2.8.3.min.js" %}"></script>
         <link rel="alternate stylesheet" type="text/css" href="{% static "switcher/color-one.css" %}" title="color-one" media="screen">
+
+        {% block extra_css %}{% endblock extra_css %}
+
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -37,7 +40,7 @@
                             <div class="row">
                                 <div class="col-lg-3 col-12">
                                     <div class="logo">
-                                        <a href="{% url "home" %}"><img src="{% static "img/logo/logo.png" %}" alt="EDUCAT"></a>
+                                        <a href="{% url "home" %}"><img src="{% static "img/logo/logo.png" %}" alt="Essays Base"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-9 col-12">
@@ -46,12 +49,11 @@
                                             <nav>
                                                 <ul id="nav">
                                                     <li class="current"><a href="{% url "home" %}">Home</a></li>
-                                                    <li><a href="{% url "catalog" %}">Catalog</a></li>
-                                                    <li><a href="#!">Essays</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="{% url "essay" %}">Essay Details</a></li>
-                                                        </ul>
-                                                    </li>
+{#                                                    <li><a href="#!">Essays</a>#}
+{#                                                        <ul class="sub-menu">#}
+{#                                                            <li><a href="{% url "essay" %}">Essay Details</a></li>#}
+{#                                                        </ul>#}
+{#                                                    </li>#}
                                                 </ul>
                                             </nav>
                                         </div>
@@ -86,12 +88,11 @@
                                         <nav id="dropdown">
                                             <ul>
                                                 <li class="current"><a href="{% url "home" %}">Home</a></li>
-                                                <li><a href="{% url "catalog" %}">Catalog</a></li>
-                                                <li><a href="#!">Essays</a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="{% url "essay" %}">Essay Details</a></li>
-                                                    </ul>
-                                                </li>
+{#                                                <li><a href="#!">Essays</a>#}
+{#                                                    <ul class="sub-menu">#}
+{#                                                        <li><a href="{% url "essay" %}">Essay Details</a></li>#}
+{#                                                    </ul>#}
+{#                                                </li>#}
                                             </ul>
                                         </nav>
                                     </div>
@@ -104,39 +105,6 @@
                 <!--End of Header Area-->
 
                 {% block main %}{% endblock main %}
-
-                <!--Newsletter Area Start-->
-                <div class="newsletter-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5">
-                            <div class="newsletter-content">
-                                <h3>SUBSCRIBE</h3>
-                                <h2>TO OUR NEWSLETTER</h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <div class="newsletter-form angle">
-                                <form action="" id="mc-form" class="mc-form footer-newsletter fix">
-                                    <div class="subscribe-form">
-                                        <input id="mc-email" type="email" name="email" placeholder="Enter your email address...">
-                                        <button id="mc-submit" type="submit">SUBSCRIBE</button>
-                                    </div>
-                                </form>
-                                <!-- mailchimp-alerts Start -->
-                                <div class="mailchimp-alerts text-centre fix pull-right">
-                                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                                </div>
-                                <!-- mailchimp-alerts end -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <!--End of Newsletter Area-->
-
 
                 <!--Footer Widget Area Start-->
                 <div class="footer-widget-area">
@@ -161,8 +129,8 @@
                                 <div class="single-footer-widget">
                                     <h3>GET IN TOUCH</h3>
                                     <a href="tel:555-555-1212"><i class="fa fa-phone"></i>555-555-1212</a>
-                                    <span><i class="fa fa-envelope"></i>info@example.com</span>
-                                    <span><i class="fa fa-globe"></i>www.educat.com</span>
+                                    <span><i class="fa fa-envelope"></i>info@essays-base.com</span>
+                                    <span><i class="fa fa-globe"></i>www.essays-base.com</span>
                                     <span><i class="fa fa-map-marker"></i>ur address goes here,street.</span>
                                 </div>
                             </div>
@@ -235,5 +203,8 @@
         <script src="{% static "js/bootstrap.min.js" %}"></script>
         <script src="{% static "js/plugins.js" %}"></script>
         <script src="{% static "js/main.js" %}"></script>
+
+        {% block extra_js %}{% endblock extra_js %}
+
     </body>
 </html>
