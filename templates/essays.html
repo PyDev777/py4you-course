@@ -31,10 +31,10 @@
             <div class="col-md-12 col-12">
                 <div class="single-latest-item">
                     <div class="single-latest-text">
-                        <h3><a  href="{% url "essay" essay.id %}">{{ essay.name }}</a></h3>
+                        <h3><a  href="{% url "essay" essay.slug %}">{{ essay.name }}</a></h3>
                         <div class="single-item-comment-view">
                            <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
-                           <span><i class="zmdi zmdi-favorite"></i>Category {{ cat }}</span>
+                           <span><i class="zmdi zmdi-favorite"></i>Category {{ essay.cat.name }}</span>
                        </div>
                        <div>{{ essay.descr }}</div>
                     </div>

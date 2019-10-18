@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils.html import format_html, strip_tags
 from .models import *
 
 
 def index_view(request):
 
-    cats = Category.objects.all().values('id', 'name')
+    cats = Category.objects.all().values('id', 'slug', 'name')
     tags = Tag.objects.all().values('id', 'name')
     context = {'cats': cats, 'tags': tags}
     return render(request, 'home.html', context)
@@ -13,10 +13,10 @@ def index_view(request):
 
 def essay_view(request, **kwargs):
 
-    essay_id = kwargs.get('id')
+    slug = kwargs.get('slug')
+    essay = get_object_or_404(Essay, slug=slug)
+    essay.description = format_html(essay.description)
 
-    essay = Essay.objects.filter(id=essay_id).values()[0]
-    essay['description'] = format_html(essay['description'])
     context = {'essay': essay}
 
     return render(request, 'essay.html', context)
@@ -24,15 +24,23 @@ def essay_view(request, **kwargs):
 
 def essays_view(request):
 
-    # search_input = request.GET.get('search_input', '')
+    qi = request.GET.get('search_input', '')
     cat = request.GET.get('category', '')
-    # tag = request.GET.get('tag', 'No Tag')
+    tag = request.GET.get('tag', '')
 
-    essays = Essay.objects.filter(cat__id=cat).values('id', 'name', 'description', 'published')
+    if qi:
+        essays = Essay.objects.filter(name__contains='qi').values('id', 'slug', 'name', 'description', 'published')
+    else:
+        if cat:
+            essays = Essay.objects.filter(cat__id=cat).values('id', 'slug', 'name', 'description', 'published')
+        else:
+            if tag:
+                essays = Essay.objects.filter(tag__id=tag).values('id', 'slug', 'name', 'description', 'published')
+            else:
+                essays = Essay.objects.all().values('id', 'slug', 'name', 'description', 'published')
 
-    for el in essays:
-        el['descr'] = strip_tags(el['description'])[:250] + '...'
-        el['description'] = format_html(el['description'])
+    for essay in essays:
+        essay['descr'] = strip_tags(essay['description'])[:250] + '...'
 
     context = {'essays': essays, 'cat': cat}
 
