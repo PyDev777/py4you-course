@@ -27,35 +27,29 @@ def essay_view(request, **kwargs):
 
 def essays_view(request):
 
+    q_params = {}
+    cat_name = 0
+
     qi = request.GET.get('search_input', '')
+    if qi:
+        q_params.update(name__contains=qi)
 
     cat = request.GET.get('category', '')
-    cat = int(cat) if cat else 0
+    cat = int(cat) if cat.isdigit() else 0
+    if cat:
+        q_params.update(cat__id=cat)
+        cat_name = get_object_or_404(Category, id=cat)
 
     tag = request.GET.get('tag', '')
-    tag = int(tag) if tag else 0
+    tag = int(tag) if tag.isdigit() else 0
+    if tag:
+        q_params.update(tag__id=tag)
+        cat_name = get_object_or_404(Tag, id=tag)
 
-    # print(f'qi={qi}, cat={cat}, tag={tag}')
+    # print(f'q_params = {q_params}')
 
-    essays = []
-    cat_name = ''
-
-    if qi:
-        pass
-        # essays = Essay.objects.filter(slug__contains=qi).values('id', 'slug', 'name', 'description', 'published')
-    else:
-        if cat:
-            essays = Essay.objects.filter(cat__id=cat).values('id', 'slug', 'name', 'description', 'published')
-            cat_name = get_object_or_404(Category, id=cat)
-            # print(f'cat_name={cat_name}')
-        else:
-            if tag:
-                essays = Essay.objects.filter(tag__id=tag).values('id', 'slug', 'name', 'description', 'published')
-                cat_name = get_object_or_404(Tag, id=tag)
-                # print(f'tag_name={cat_name}')
-            else:
-                pass
-                # essays = Essay.objects.all().values('id', 'slug', 'name', 'description', 'published')
+    essays = Essay.objects.filter(**q_params).values() if q_params else []
+    # print(f'essays = {essays}')
 
     for essay in essays:
         essay['descr'] = strip_tags(essay['description'])[:250] + '...'

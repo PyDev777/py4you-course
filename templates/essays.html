@@ -34,7 +34,9 @@
                         <h3><a  href="{% url "essay" cat_name essay.slug %}">{{ essay.name }}</a></h3>
                         <div class="single-item-comment-view">
                            <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
-                           <span><i class="zmdi zmdi-favorite"></i>Category {{ cat_name }}</span>
+                           <span><i class="zmdi zmdi-favorite"></i>
+                               Category {{ cat_name }}
+                           </span>
                        </div>
                        <div>{{ essay.descr }}</div>
                     </div>
