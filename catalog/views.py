@@ -28,24 +28,39 @@ def essay_view(request, **kwargs):
 def essays_view(request):
 
     qi = request.GET.get('search_input', '')
+
     cat = request.GET.get('category', '')
+    cat = int(cat) if cat else 0
+
     tag = request.GET.get('tag', '')
+    tag = int(tag) if tag else 0
+
+    # print(f'qi={qi}, cat={cat}, tag={tag}')
+
+    essays = []
+    cat_name = ''
 
     if qi:
-        essays = Essay.objects.filter(name__contains='qi').values('id', 'slug', 'name', 'description', 'published')
+        pass
+        # essays = Essay.objects.filter(slug__contains=qi).values('id', 'slug', 'name', 'description', 'published')
     else:
         if cat:
             essays = Essay.objects.filter(cat__id=cat).values('id', 'slug', 'name', 'description', 'published')
+            cat_name = get_object_or_404(Category, id=cat)
+            # print(f'cat_name={cat_name}')
         else:
             if tag:
                 essays = Essay.objects.filter(tag__id=tag).values('id', 'slug', 'name', 'description', 'published')
+                cat_name = get_object_or_404(Tag, id=tag)
+                # print(f'tag_name={cat_name}')
             else:
-                essays = Essay.objects.all().values('id', 'slug', 'name', 'description', 'published')
+                pass
+                # essays = Essay.objects.all().values('id', 'slug', 'name', 'description', 'published')
 
     for essay in essays:
         essay['descr'] = strip_tags(essay['description'])[:250] + '...'
 
-    cat_name = get_object_or_404(Category, id=cat)
+    # print(f'essays={essays}')
 
     context = {'essays': essays, 'cat_name': cat_name}
 
