@@ -5,19 +5,22 @@ from .models import *
 
 def index_view(request):
 
-    cats = Category.objects.all().values('id', 'slug', 'name')
-    tags = Tag.objects.all().values('id', 'name')
-    context = {'cats': cats, 'tags': tags}
-    return render(request, 'home.html', context)
+    # cats = Category.objects.all().values('id', 'slug', 'name')
+    # tags = Tag.objects.all().values('id', 'name')
+    # context = {'cats': cats, 'tags': tags}
+
+    return render(request, 'home.html', context={})
 
 
 def essay_view(request, **kwargs):
 
     slug = kwargs.get('slug')
+    cat_name = kwargs.get('cat_name')
+
     essay = get_object_or_404(Essay, slug=slug)
     essay.description = format_html(essay.description)
 
-    context = {'essay': essay}
+    context = {'essay': essay, 'cat_name': cat_name}
 
     return render(request, 'essay.html', context)
 
@@ -42,7 +45,9 @@ def essays_view(request):
     for essay in essays:
         essay['descr'] = strip_tags(essay['description'])[:250] + '...'
 
-    context = {'essays': essays, 'cat': cat}
+    cat_name = get_object_or_404(Category, id=cat)
+
+    context = {'essays': essays, 'cat_name': cat_name}
 
     return render(request, 'essays.html', context)
 

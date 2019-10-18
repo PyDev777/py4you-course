@@ -24,7 +24,7 @@ from catalog import views
 urlpatterns = [
 
     path('', views.index_view, name='home'),
-    path('essay/<slug:slug>/', views.essay_view, name='essay'),
+    path('essay/<str:cat_name>/<slug:slug>/', views.essay_view, name='essay'),
     path('essays/', views.essays_view, name='essays'),
 
     path('summernote/', include('django_summernote.urls')),
