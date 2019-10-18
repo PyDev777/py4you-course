@@ -31,6 +31,8 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
+    path('robots.txt', views.robots_view)
+
 ]
 
 if settings.DEBUG:

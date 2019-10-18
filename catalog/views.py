@@ -45,3 +45,7 @@ def essays_view(request):
     context = {'essays': essays, 'cat': cat}
 
     return render(request, 'essays.html', context)
+
+
+def robots_view(request):
+    return render(request, 'robots.txt', {}, content_type="text/plain")
