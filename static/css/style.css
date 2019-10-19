@@ -174,7 +174,7 @@ body {
     transition: all 0.3s ease 0s
 }
 .section-margin {margin: 120px 0 140px 0}
-.section-padding {padding: 120px 0}
+.section-padding {padding: 60px 0}
 .section-bottom-padding {padding: 0 0 120px 0}
 .section-top-padding {padding: 120px 0 0 0}
 .section-title {
@@ -1152,7 +1152,7 @@ body {
 /*----------------------------------------*/
 /*  7. Latest News Area
 /*----------------------------------------*/
-.latest-area {padding: 120px 0 70px;}
+.latest-area {padding: 60px 0;}
 .single-latest-text > h3 {
     font-family: raleway;
     font-size: 22px;
@@ -1161,7 +1161,7 @@ body {
 }
 .single-latest-item {
     overflow: hidden;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s
 }
@@ -2089,7 +2089,7 @@ span.comment-time {padding-right: 3px; position: relative;}
 .breadcrumb-banner-area {
     background: rgba(0, 0, 0, 0) url("../img/banner/4.jpg") no-repeat scroll 0 0;
     color: #ffffff;
-    padding: 110px 0;
+    padding: 60px 0;
     position: relative;
 }
 .breadcrumb-banner-area.fixed-bg {background: url("../img/slider/3.jpg") no-repeat fixed top center / cover}
@@ -2125,17 +2125,17 @@ span.comment-time {padding-right: 3px; position: relative;}
     position: relative;
     font-size: 36px
 }
-.breadcrumb-text h1:after {
-    background: #ffffff none repeat scroll 0 0;
-    bottom: 0;
-    content: "";
-    height: 29px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    right: 0;
-    width: 2px;
-}
+/*.breadcrumb-text h1:after {*/
+    /*background: #ffffff none repeat scroll 0 0;*/
+    /*bottom: 0;*/
+    /*content: "";*/
+    /*height: 29px;*/
+    /*left: 0;*/
+    /*margin: auto;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*width: 2px;*/
+/*}*/
 .breadcrumb-bar li {
     color: #ffffff;
     font-family: "montserratregular";
@@ -2157,7 +2157,7 @@ span.comment-time {padding-right: 3px; position: relative;}
 .breadcrumb-text h1.text-left::after, .breadcrumb-text h1.text-right::after {display: none;}
 .breadcrumb-bar .breadcrumb > li:first-child:before {
     border-radius: 50%;
-    content: "ï‹»";
+    content: "/";
     display: inline-block;
     font-family: "Material-Design-Iconic-Font";
     font-size: 18px;
