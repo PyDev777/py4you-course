@@ -163,10 +163,10 @@
                             <input type="url" name="website" placeholder="Website">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="rating" placeholder="Rating">
+{#                            <input type="text" name="rating" placeholder="Rating">#}
                         </div>
                         <div class="col-md-12">
-                            <textarea name="message" cols="30" rows="10" placeholder="Coment"></textarea>
+                            <textarea name="message" cols="30" rows="10" placeholder="Comment"></textarea>
                             <button type="submit" class="button-default">SUBMIT</button>
                         </div>
                     </div>
@@ -187,7 +187,15 @@
                                         <h4><a href="#">{{ review.name }}</a></h4>
                                         <span class="comment-time">{{ review.published }}</span>
                                         <span>Rating: {{ review.rating }}</span>
+                                        {% for i in '12345' %}
+                                            {% if review.rating >= i|add:0 %}
+                                                <span><i class="zmdi zmdi-star"></i></span>
+                                            {% else %}
+                                                <span><i class="zmdi zmdi-star-outline"></i></span>
+                                            {% endif %}
+                                        {% endfor %}
                                     </div>
+                                    <hr>
                                     <p>{{ review.comment|safe }}</p>
                                     <hr>
                                 </div>
