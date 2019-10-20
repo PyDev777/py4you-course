@@ -45,7 +45,7 @@ class ResultListView(ListView):
         if tag:
             q_params.update(tag__id=tag)
 
-        essays = Essay.objects.filter(**q_params).order_by('-published') if q_params else []
+        essays = Essay.objects.filter(**q_params).order_by('-published')
 
         # print(f'essays = {essays}')
         return essays

@@ -1776,7 +1776,7 @@ body {
     overflow: hidden;
     padding: 38px 64px;
     position: relative;
-    z-index: 3;
+    z-index: 10;
 }
 .form-container:after {
     background: rgba(134, 188, 66, 0.85) none repeat scroll 0 0;
