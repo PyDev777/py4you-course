@@ -23,14 +23,12 @@ from catalog import views
 
 urlpatterns = [
 
-    path('', views.index_view, name='home'),
-    path('essay/<str:cat_name>/<slug:slug>/', views.essay_view, name='essay'),
-    path('essays/', views.essays_view, name='essays'),
+    path('', views.IndexView.as_view(), name='home'),
+    path('result-list/', views.ResultListView.as_view(), name='result'),
+    path('essay/<slug:slug>/', views.EssayDetailView.as_view(), name='essay'),
 
     path('summernote/', include('django_summernote.urls')),
-
     path('admin/', admin.site.urls),
-
     path('robots.txt', views.robots_view)
 
 ]

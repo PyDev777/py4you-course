@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<!--Breadcrumb Banner Area Start-->
+<div class="breadcrumb-banner-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-text">
+                    <h1 class="text-center">SEARCH RESULT</h1>
+                    <div class="breadcrumb-bar">
+                        <ul class="breadcrumb text-center">
+                            <li><a href="{% url "home" %}">Home</a></li>
+                            <li>Essays List</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Breadcrumb Banner Area-->
+
+<div class="latest-area section-padding bg-white">
+    <div class="container">
+
+        <div class="row">
+
+            {% for essay in object_list %}
+            <div class="col-md-12 col-12">
+                <div class="single-latest-item">
+                    <div class="single-latest-text">
+                        <h3><a  href="{% url "essay" essay.slug %}">{{ essay.name }}</a></h3>
+                        <div class="single-item-comment-view">
+                           <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
+
+                           <span><i class="zmdi zmdi-favorite"></i>
+                            Category:
+                                {{ essay.cat_name }}
+                           </span>
+                           <span><i class="zmdi zmdi-favorite"></i>
+                            Tag:
+                                {{ essay.tag_name }}
+                           </span>
+
+                       </div>
+                       <div>{{ essay.descr }}</div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <h3>No Essays found.</h3>
+            {% endfor %}
+        </div>
+
+
+        {% if is_paginated %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pagination-content number">
+                    <ul class="pagination">
+
+                        {% if page_obj.has_previous %}
+                            <li><a href="?page=1">1</a></li>
+                            <li><a href="?page={{ page_obj.previous_page_number }}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                        {% endif %}
+
+                        <li class="current"><a href="#">{{ page_obj.number }}</a></li>
+
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            <li><a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+{#        {% if is_paginated %}#}
+{#        <!-- Pagination Block -->#}
+{#        <div class="row pt--30">#}
+{#            <div class="col-md-12">#}
+{#                <div class="pagination-block">#}
+{#                    <ul class="pagination-btns flex-center">#}
+{#                        <li><a href="?page=1" class="single-btn prev-btn ">|<i#}
+{#                                    class="zmdi zmdi-chevron-left"></i> </a></li>#}
+{#        #}
+{#                        {% if page_obj.has_previous %}#}
+{#                        <li><a href="?page={{ page_obj.previous_page_number }}" class="single-btn prev-btn ">#}
+{#                            <i class="zmdi zmdi-chevron-left"></i> </a></li>#}
+{#                        {% endif %}#}
+{#        #}
+{#        #}
+{#                        {% for i in paginator.page_range %}#}
+{#                            {% if forloop.counter|add:5 > page_obj.number and forloop.counter < page_obj.number|add:5 %}#}
+{#                                {% if page_obj.number == i %}#}
+{#                                    <li class="active"><a class="single-btn">{{i}}</a></li>#}
+{#                                {% else %}#}
+{#                                    <li><a href="?page={{i}}" class="single-btn">{{i}}</a></li>#}
+{#                                {% endif %}#}
+{#                            {% endif %}#}
+{#                        {% endfor %}#}
+{#        #}
+{#                        {% if page_obj.has_next %}#}
+{#                        <li><a href="?page={{ page_obj.next_page_number }}" class="single-btn next-btn">#}
+{#                            <i class="zmdi zmdi-chevron-right"></i></a></li>#}
+{#                        {% endif %}#}
+{#        #}
+{#                        <li><a href="?page={{ paginator.num_pages }}" class="single-btn next-btn">#}
+{#                            <i class="zmdi zmdi-chevron-right"></i>|</a></li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        {% endif %}#}
+
+    </div>
+</div>
+
+{% endblock main %}

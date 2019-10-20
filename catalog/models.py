@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.html import format_html, strip_tags
 
 
 class Category(models.Model):
@@ -45,6 +46,18 @@ class Essay(models.Model):
     parsing_date = models.DateTimeField(auto_now=True)
     cat = models.ManyToManyField(Category)
     tag = models.ManyToManyField(Tag)
+
+    @property
+    def cat_name(self):
+        return self.cat.first()
+
+    @property
+    def tag_name(self):
+        return self.tag.first()
+
+    @property
+    def descr(self):
+        return strip_tags(self.description[:250]) + '...'
 
     def __str__(self):
         return self.name

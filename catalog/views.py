@@ -1,64 +1,52 @@
-from django.shortcuts import render, get_object_or_404
-from django.utils.html import format_html, strip_tags
+from django.shortcuts import render
+# from django.utils.html import format_html, strip_tags
+from django.views.generic import TemplateView, ListView, DetailView
+
 from .models import *
 
 
-def index_view(request):
-
-    # cats = Category.objects.all().values('id', 'slug', 'name')
-    # tags = Tag.objects.all().values('id', 'name')
-    # context = {'cats': cats, 'tags': tags}
-
-    return render(request, 'home.html', context={})
+class IndexView(TemplateView):
+    template_name = "home.html"
 
 
-def essay_view(request, **kwargs):
+class EssayDetailView(DetailView):
+    template_name = 'essay.html'
+    model = Essay
 
-    slug = kwargs.get('slug')
-    cat_name = kwargs.get('cat_name')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-    essay = get_object_or_404(Essay, slug=slug)
-    essay.description = format_html(essay.description)
+        self.object.description = format_html(self.object.description)
 
-    context = {'essay': essay, 'cat_name': cat_name}
-
-    return render(request, 'essay.html', context)
+        return context
 
 
-def essays_view(request):
+class ResultListView(ListView):
+    template_name = 'result.html'
+    paginate_by = 5
 
-    q_params = {}
-    cat_name = 0
+    def get_queryset(self):
 
-    qi = request.GET.get('search_input', '')
-    if qi:
-        q_params.update(name__contains=qi)
+        q_params = {}
 
-    cat = request.GET.get('category', '')
-    cat = int(cat) if cat.isdigit() else 0
-    if cat:
-        q_params.update(cat__id=cat)
-        cat_name = get_object_or_404(Category, id=cat)
+        qi = self.request.GET.get('search_input', '')
+        if qi:
+            q_params.update(name__contains=qi)
 
-    tag = request.GET.get('tag', '')
-    tag = int(tag) if tag.isdigit() else 0
-    if tag:
-        q_params.update(tag__id=tag)
-        cat_name = get_object_or_404(Tag, id=tag)
+        cat = self.request.GET.get('category', '')
+        cat = int(cat) if cat.isdigit() else 0
+        if cat:
+            q_params.update(cat__id=cat)
 
-    # print(f'q_params = {q_params}')
+        tag = self.request.GET.get('tag', '')
+        tag = int(tag) if tag.isdigit() else 0
+        if tag:
+            q_params.update(tag__id=tag)
 
-    essays = Essay.objects.filter(**q_params).values() if q_params else []
-    # print(f'essays = {essays}')
+        essays = Essay.objects.filter(**q_params).order_by('-published') if q_params else []
 
-    for essay in essays:
-        essay['descr'] = strip_tags(essay['description'])[:250] + '...'
-
-    # print(f'essays={essays}')
-
-    context = {'essays': essays, 'cat_name': cat_name}
-
-    return render(request, 'essays.html', context)
+        # print(f'essays = {essays}')
+        return essays
 
 
 def robots_view(request):
