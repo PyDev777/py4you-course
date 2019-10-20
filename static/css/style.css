@@ -1675,7 +1675,7 @@ body {
 .pagination-content.number .pagination {
     background: #ffffff none repeat scroll 0 0;
     box-shadow: none;
-    margin: 100px 0 20px;
+    margin: 20px 0 20px;
 }
 .pagination-content.number .pagination li a {
 	border: 1px solid #86bc42;

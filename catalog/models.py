@@ -9,7 +9,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     slug = models.CharField(max_length=255)
     description = models.TextField()
 
@@ -23,7 +23,7 @@ class Tag(models.Model):
         verbose_name = 'Tag'
         verbose_name_plural = 'Tags'
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
 
     def __str__(self):
         return self.name
@@ -35,7 +35,7 @@ class Essay(models.Model):
         verbose_name = 'Essay'
         verbose_name_plural = 'Essays'
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     slug = models.CharField(max_length=255, unique=True)
     author = models.CharField(max_length=255, blank=True, default='')
     description = models.TextField()
@@ -58,6 +58,26 @@ class Essay(models.Model):
     @property
     def descr(self):
         return strip_tags(self.description[:250]) + '...'
+
+    def __str__(self):
+        return self.name
+
+
+class Review(models.Model):
+
+    class Meta:
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
+
+    name = models.CharField(max_length=255, db_index=True)
+    email = models.EmailField()
+    comment = models.TextField()
+    rating = models.IntegerField()
+    website = models.URLField()
+    published = models.DateField(auto_now=True)
+    moderated = models.BooleanField(default=False)
+
+    essay = models.ForeignKey(Essay, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

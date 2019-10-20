@@ -27,11 +27,11 @@
 <div class="news-details-area section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 col-md-12 col-12">
-                <div class="news-details-content">
-                   <div class="single-latest-item">
-                        <div class="single-latest-text">
-                            <h2>{{ essay.name }}</h2>
+            <div class="col-lg-9 col-md-12">
+                <div class="event-details-content">
+                    <div class="single-event-item">
+                        <div class="single-event-text">
+                            <h3>{{ essay.name }}</h3>
                             <br>
                             <div class="single-item-comment-view">
                                <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
@@ -40,11 +40,13 @@
                             </div>
                             <hr>
                             <br>
-                            {{ essay.description }}
+                            {{ essay.description|safe }}
                         </div>
                     </div>
+
                 </div>
             </div>
+
             <div class="col-lg-3 col-md-12 col-12">
                 <div class="sidebar-widget">
                     <div class="single-sidebar-widget">
@@ -141,6 +143,67 @@
     </div>
 </div>
 <!--End of News Details Area-->
+
+
+<div class="contact-form-area section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <h4 class="contact-title">send your comment</h4>
+                <form id="contact-form" action="" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="Vy49mYeZ8WIfbdnU7fOnmrCbajgcSiWj9NFAL1lqhcE06zYK04PHqOBiRswJbIsF">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="name" placeholder="Name">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="url" name="website" placeholder="Website">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="rating" placeholder="Rating">
+                        </div>
+                        <div class="col-md-12">
+                            <textarea name="message" cols="30" rows="10" placeholder="Coment"></textarea>
+                            <button type="submit" class="button-default">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
+                <p class="form-messege"></p>
+            </div>
+            <div class="col-lg-9 col-md-12">
+                <div class="event-details-content">
+                    <div class="comments">
+                        <h4 class="title">Comments</h4>
+
+                        {% if reviews %}
+
+                            {% for review in reviews %}
+                            <div class="single-comment">
+                                <div class="comment-text">
+                                    <div class="author-info">
+                                        <h4><a href="#">{{ review.name }}</a></h4>
+                                        <span class="comment-time">{{ review.published }}</span>
+                                        <span>Rating: {{ review.rating }}</span>
+                                    </div>
+                                    <p>{{ review.comment|safe }}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        {% else %}
+                            <p>No comments yet. Be first!</p>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {%  endblock main %}

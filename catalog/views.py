@@ -1,6 +1,4 @@
 from django.shortcuts import render
-# from django.utils.html import format_html, strip_tags
-from django.http import QueryDict
 from django.views.generic import TemplateView, ListView, DetailView
 
 
@@ -18,8 +16,7 @@ class EssayDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        self.object.description = format_html(self.object.description)
-
+        context['reviews'] = Review.objects.filter(essay=self.object, moderated=True).order_by('-published')
         return context
 
 
@@ -46,8 +43,6 @@ class ResultListView(ListView):
             q_params.update(tag__id=tag)
 
         essays = Essay.objects.filter(**q_params).order_by('-published')
-
-        # print(f'essays = {essays}')
         return essays
 
     def get_context_data(self, **kwargs):
