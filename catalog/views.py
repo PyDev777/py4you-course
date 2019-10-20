@@ -1,6 +1,8 @@
 from django.shortcuts import render
 # from django.utils.html import format_html, strip_tags
+from django.http import QueryDict
 from django.views.generic import TemplateView, ListView, DetailView
+
 
 from .models import *
 
@@ -47,6 +49,15 @@ class ResultListView(ListView):
 
         # print(f'essays = {essays}')
         return essays
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        q_get = self.request.GET.copy()
+        q_get.pop('page', None)
+        context['q_get'] = q_get.urlencode()
+
+        return context
 
 
 def robots_view(request):
