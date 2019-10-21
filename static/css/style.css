@@ -1081,9 +1081,9 @@ body {
 .single-item-text-info span span {color: #2d3e50;}
 .single-item-text > p {color: #222222;}
 .single-item-content {
-    margin-bottom: 44px;
+    margin-bottom: 0;
     overflow: hidden;
-    padding-top: 21px;
+    padding-top: 0;
 }
 .single-item-text-info {margin-bottom: 18px; padding-top: 5px;}
 .single-item-comment-view span {

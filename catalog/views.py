@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
-
+from django.contrib import messages
 
 from .models import *
+from .forms import ReviewForm
 
 
 class IndexView(TemplateView):
@@ -18,6 +19,22 @@ class EssayDetailView(DetailView):
 
         context['reviews'] = Review.objects.filter(essay=self.object, moderated=True).order_by('-published')
         return context
+
+    def post(self, *args, **kwargs):
+
+        self.object = self.get_object()
+        self.form = ReviewForm(self.request.POST)
+
+        context = self.get_context_data(**kwargs)
+
+        if self.form.is_valid():
+            Review.objects.create(**self.form.cleaned_data)
+            messages.add_message(self.request, messages.INFO, 'Thanks! Your review is on moderation.')
+        else:
+            context['form'] = self.form
+            messages.add_message(self.request, messages.ERROR, 'Error! Your review is not send!')
+
+        return self.render_to_response(context)
 
 
 class ResultListView(ListView):
