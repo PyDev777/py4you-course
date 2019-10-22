@@ -218,25 +218,24 @@
                             <div class="col-md-6">
                                 <input type="url" name="website" placeholder="Website">
                             </div>
-                            <div class="col-md-6">
-                            </div>
                             <div class="col-md-12">
                                 <textarea name="comment" cols="30" rows="10" placeholder="Comment"></textarea>
+                            </div>
+                            <div class="col-md-3">
                                 <button type="submit" class="button-default">SUBMIT</button>
                             </div>
-
+                            <div class="col-md-9">
                             {% if messages %}
-                            <div class="col-md-12">
                                 <ul class="messages">
                                     {% for message in messages %}
                                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                                     {% endfor %}
                                 </ul>
-                            </div>
                             {% endif %}
+                            </div>
                         </div>
                     </form>
-                    <p class="form-messege"></p>
+                    <br><br>
                 </div>
             </div>
         </div>
