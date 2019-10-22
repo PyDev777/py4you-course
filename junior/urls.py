@@ -25,7 +25,7 @@ from catalog import views
 urlpatterns = [
 
     path('', cache_page(60*5)(views.IndexView.as_view()), name='home'),
-    path('result-list/', views.ResultListView.as_view(), name='result'),
+    path('result-list/', cache_page(60*5)(views.ResultListView.as_view()), name='result'),
     path('essay/<slug:slug>/', views.EssayDetailView.as_view(), name='essay'),
 
     path('summernote/', include('django_summernote.urls')),
