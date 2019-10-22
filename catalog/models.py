@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.utils.html import format_html, strip_tags
+from django.utils.html import strip_tags
 
 
 class Category(models.Model):
@@ -39,21 +39,13 @@ class Essay(models.Model):
     slug = models.CharField(max_length=255, unique=True)
     author = models.CharField(max_length=255, blank=True, default='')
     description = models.TextField()
-    published = models.DateField()
+    published = models.DateField(db_index=True)
     img = models.ImageField(blank=True, default='', upload_to=settings.IMG_UPLOAD_TO)
     img_source = models.URLField(max_length=255, blank=True, default='')
     essay_source = models.URLField(max_length=255, blank=True, default='')
     parsing_date = models.DateTimeField(auto_now=True)
     cat = models.ManyToManyField(Category)
     tag = models.ManyToManyField(Tag)
-
-    @property
-    def cat_name(self):
-        return self.cat.first()
-
-    @property
-    def tag_name(self):
-        return self.tag.first()
 
     @property
     def descr(self):
@@ -74,7 +66,7 @@ class Review(models.Model):
     comment = models.TextField()
     rating = models.IntegerField()
     website = models.URLField()
-    published = models.DateField(auto_now=True)
+    published = models.DateField(auto_now=True, db_index=True)
     moderated = models.BooleanField(default=False)
 
     essay = models.ForeignKey(Essay, on_delete=models.CASCADE)

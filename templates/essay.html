@@ -14,7 +14,7 @@
                     <div class="breadcrumb-bar">
                         <ul class="breadcrumb text-center">
                             <li><a href="{% url "home" %}">Home</a></li>
-                            <li>{{ essay.cat_name }}</li>
+                            <li>{% for category in essay.cat.all %}{{category.name}}{% endfor %}</li>
                         </ul>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
                             <br>
                             <div class="single-item-comment-view">
                                <span><i class="zmdi zmdi-calendar-check"></i>{{ essay.published }}</span>
-                               <span><i class="zmdi zmdi-favorite"></i>Category: {{ essay.cat_name }}</span>
-                               <span><i class="zmdi zmdi-favorite"></i>Tag: {{ essay.tag_name }}</span>
+                               <span><i class="zmdi zmdi-favorite"></i>Category: {% for category in essay.cat.all %}{{category.name}}{% endfor %}</span>
+                               <span><i class="zmdi zmdi-favorite"></i>Tag: {% for tag in essay.tag.all %}{{tag.name}}{% endfor %}</span>
                             </div>
                             <hr>
                             <br>

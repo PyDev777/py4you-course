@@ -64,7 +64,7 @@ class ResultListView(ListView):
         if tag:
             q_params.update(tag__id=tag)
 
-        essays = Essay.objects.filter(**q_params).order_by('-published')
+        essays = Essay.objects.filter(**q_params).prefetch_related('cat', 'tag').order_by('-published')
         return essays
 
     def get_context_data(self, **kwargs):

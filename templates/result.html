@@ -39,11 +39,11 @@
 
                            <span><i class="zmdi zmdi-favorite"></i>
                             Category:
-                                {{ essay.cat_name }}
+                               {% for category in essay.cat.all %}{{category.name}}{% endfor %}
                            </span>
                            <span><i class="zmdi zmdi-favorite"></i>
                             Tag:
-                                {{ essay.tag_name }}
+                               {% for tag in essay.tag.all %}{{tag.name}}{% endfor %}
                            </span>
 
                        </div>
