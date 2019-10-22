@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import *
 from .forms import ReviewForm
@@ -28,10 +30,13 @@ class EssayDetailView(DetailView):
         context = self.get_context_data(**kwargs)
 
         if self.form.is_valid():
-            Review.objects.create(**self.form.cleaned_data)
+            self.form.cleaned_data['essay'] = self.object
+            data = self.form.cleaned_data
+            Review.objects.create(**data)
             messages.add_message(self.request, messages.INFO, 'Thanks! Your review is on moderation.')
+
+            return HttpResponseRedirect(reverse('essay', kwargs={'slug': self.object.slug}))
         else:
-            context['form'] = self.form
             messages.add_message(self.request, messages.ERROR, 'Error! Your review is not send!')
 
         return self.render_to_response(context)

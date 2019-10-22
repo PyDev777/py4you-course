@@ -161,8 +161,6 @@
                                         <span class="comment-time">Posted on {{ review.published }} </span>
                                         <div class="single-item-text">
                                             <div class="single-item-content">
-                                               <div class="single-item-comment-view">
-                                               </div>
                                                <div class="single-item-rating">
                                                {% for i in '12345' %}
                                                    {% if review.rating >= i|add:0 %}
@@ -175,7 +173,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {{ review.comment|safe }}
+                                    <p>{{ review.comment|safe }}</p>
                                 </div>
                             </div>
                             {% endfor %}
@@ -185,52 +183,61 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9 col-12">
-                <h4 class="contact-title">send your comment</h4>
-                <form id="contact-form" action="" method="post">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" name="name" placeholder="Name">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="email" name="email" placeholder="Email">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="url" name="website" placeholder="Website">
-                        </div>
-                        <div class="col-md-6">
-                            <p class="d-block">Your Rating</p>
-                            <div class="single-item-rating">
-                                <input type="radio" name="rating" value="1" id="star1">
-                                <label for="star1"><i class="zmdi zmdi-star-outline"></i></label>
-                                <input type="radio" name="rating" value="2" id="star2">
-                                <label for="star2"><i class="zmdi zmdi-star-outline"></i></label>
-                                <input type="radio" name="rating" value="3" id="star3">
-                                <label for="star3"><i class="zmdi zmdi-star-outline"></i></label>
-                                <input type="radio" name="rating" value="4" id="star4">
-                                <label for="star4"><i class="zmdi zmdi-star-outline"></i></label>
-                                <input type="radio" name="rating" value="5" id="star5">
-                                <label for="star5"><i class="zmdi zmdi-star-outline"></i></label>
-                           </div>
-                        </div>
-                        <div class="col-md-12">
-                            <textarea name="comment" cols="30" rows="10" placeholder="Comment"></textarea>
-                            <button type="submit" class="button-default">SUBMIT</button>
-                        </div>
 
-                        {% if messages %}
-                        <div class="col-md-12">
-                            <ul class="messages">
-                                {% for message in messages %}
-                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                                {% endfor %}
-                            </ul>
+            <div class="col-lg-9 col-12">
+
+                <h4 class="contact-title">send your comment</h4>
+
+                <div class="rating-row pt-2">
+
+                    <form id="contact-form" action="{% url 'essay' object.slug %}" method="post">
+                        {% csrf_token %}
+
+                        <p class="d-block">Your Rating</p>
+                        <span class="rating-widget-block">
+                            <input type="radio" name="rating" value="1" id="star1">
+                            <label for="star1"></label>
+                            <input type="radio" name="rating" value="2" id="star2">
+                            <label for="star2"></label>
+                            <input type="radio" name="rating" value="3" id="star3">
+                            <label for="star3"></label>
+                            <input type="radio" name="rating" value="4" id="star4">
+                            <label for="star4"></label>
+                            <input type="radio" name="rating" value="5" id="star5">
+                            <label for="star5"></label>
+                        </span>
+                        <br><br>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="name" placeholder="Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="url" name="website" placeholder="Website">
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                                <textarea name="comment" cols="30" rows="10" placeholder="Comment"></textarea>
+                                <button type="submit" class="button-default">SUBMIT</button>
+                            </div>
+
+                            {% if messages %}
+                            <div class="col-md-12">
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
-                    </div>
-                </form>
-                <p class="form-messege"></p>
+                    </form>
+                    <p class="form-messege"></p>
+                </div>
             </div>
         </div>
     </div>

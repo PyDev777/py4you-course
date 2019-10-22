@@ -1084,6 +1084,7 @@ body {
     margin-bottom: 0;
     overflow: hidden;
     padding-top: 0;
+    padding-bottom: 15px;
 }
 .single-item-text-info {margin-bottom: 18px; padding-top: 5px;}
 .single-item-comment-view span {
@@ -2690,3 +2691,58 @@ span.c-text {display: inline-block;}
 .btn-toolbar.padding:nth-last-of-type(1) {margin-bottom: 0;}
 
 
+/* ---------------------------------------------------------------------- */
+
+/*Dynamic Rating*/
+.rating-row p {
+  margin-right: 3px;
+  display: inline-block;
+  font-weight: 500; }
+
+.rating-widget-block {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg); }
+
+.rating-widget-block input {
+  display: none; }
+
+.rating-widget-block label {
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0;
+  display: inline-block; }
+  .rating-widget-block label:last-child {
+    margin-right: 0; }
+
+.rating-widget-block label:before {
+  /*content: "\f005";*/
+  content: "\2605";
+  /*font-family: "Font Awesome 5 Free";*/
+  font-family: "Font Awesome";
+  position: relative;
+  display: block;
+  font-size: 32px;
+  color: #e3e3e3;
+  font-weight: 900; }
+
+.rating-widget-block label:after {
+  content: "\2605";
+  /*font-family: "Font Awesome 5 Free";*/
+  font-family: "Font Awesome";
+  position: absolute;
+  display: block;
+  font-size: 32px;
+  color: #fec701;
+  font-weight: 900;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: 0.4s;
+  -o-transition: 0.4s;
+  transition: 0.4s; }
+
+.rating-widget-block label:hover ~ label:after,
+.rating-widget-block label:hover:after,
+.rating-widget-block input:checked ~ label:after {
+  opacity: 1; }
