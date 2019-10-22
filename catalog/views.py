@@ -3,6 +3,8 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
 
 from .models import *
 from .forms import ReviewForm
@@ -12,6 +14,7 @@ class IndexView(TemplateView):
     template_name = "home.html"
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class EssayDetailView(DetailView):
     template_name = 'essay.html'
     model = Essay

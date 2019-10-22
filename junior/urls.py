@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.decorators.cache import cache_page
 
 from catalog import views
 
 
 urlpatterns = [
 
-    path('', views.IndexView.as_view(), name='home'),
+    path('', cache_page(60*5)(views.IndexView.as_view()), name='home'),
     path('result-list/', views.ResultListView.as_view(), name='result'),
     path('essay/<slug:slug>/', views.EssayDetailView.as_view(), name='essay'),
 
