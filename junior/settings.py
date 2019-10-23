@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'catalog.apps.CatalogConfig',
+    'task.apps.TaskConfig',
 ]
 
 MIDDLEWARE = [
