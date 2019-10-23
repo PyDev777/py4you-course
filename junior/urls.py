@@ -25,6 +25,7 @@ from catalog import views
 urlpatterns = [
 
     path('', cache_page(60*5)(views.IndexView.as_view()), name='home'),
+    path('contact/', cache_page(60*5)(views.ContactView.as_view()), name='contact'),
     path('result-list/', cache_page(60*5)(views.ResultListView.as_view()), name='result'),
     path('essay/<slug:slug>/', views.EssayDetailView.as_view(), name='essay'),
 
@@ -43,3 +44,5 @@ if settings.DEBUG:
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
+
+#  style="width:100%;height:485px;filter: grayscale(100%);-webkit-filter: grayscale(100%);"

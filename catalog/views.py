@@ -14,6 +14,10 @@ class IndexView(TemplateView):
     template_name = "home.html"
 
 
+class ContactView(TemplateView):
+    template_name = "contact.html"
+
+
 @method_decorator(csrf_protect, name='dispatch')
 class EssayDetailView(DetailView):
     template_name = 'essay.html'
